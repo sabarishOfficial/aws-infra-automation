@@ -71,7 +71,7 @@ resource "aws_route_table" "private_route_table" {
   vpc_id = aws_vpc.vpc.id
   route {
     cidr_block = var.cidr_block.route_table["cidr_block"]
-    gateway_id = aws_nat_gateway.private_nat_gateway.id
+    nat_gateway_id = aws_nat_gateway.private_nat_gateway.id
   }
   tags = {
     Name = "private_route_table"
