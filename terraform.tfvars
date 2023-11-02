@@ -1,9 +1,9 @@
 # provider block variables
 provider_block = {
-  alias = "virginia"
-  mu    = "ap-south-1"
-  vg    = "us-east-1"
-  access_key= ""
+  alias      = "virginia"
+  mu         = "ap-south-1"
+  vg         = "us-east-1"
+  access_key = ""
   secret_key = ""
 }
 # VPC
@@ -70,11 +70,11 @@ server_sg = {
 # server variable values
 ec2_instance = {
   dev = {
-    ami           = "ami-0376ec8eacdf70aae"
+    ami           = "ami-0a7cf821b91bcccbc"
     instance_type = "t2.micro"
   },
   jenkins = {
-    ami           = "ami-0376ec8eacdf70aae"
+    ami           = "ami-0a7cf821b91bcccbc"
     instance_type = "t2.micro"
   }
 }
