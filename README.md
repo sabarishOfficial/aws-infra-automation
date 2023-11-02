@@ -3,7 +3,23 @@
 
 ## Project overview: 
 
-This project creates one VPC, three public and private subnets, three private and public route tables, and two security groups. It also uses this technology in its child modules.
+This project creates one VPC, three public and private subnets, three private and public route tables, and two security groups. It also uses this technology in its child modules, congurations management tool using ansible and we intergate terraform, ansiable 
+
+## Technologies Used
+
+-  Terraform: Infrastructure as Code (IaC) tool used for provisioning and managing cloud resources.
+- Ansible: Configuration management tool used for automating software provisioning, configuration management, and application deployment.
+
+## Prerequisites
+
+Before you begin, ensure you have the following installed:
+
+- Terraform
+- Ansible
+
+## Additional Details
+
+For a deeper understanding of how Ansible creates and configures resources, please refer to the [ansible-lemp-installation](https://github.com/sabarishOfficial/ansible-lemp-installation) project. It provides comprehensive documentation and examples for Ansible usage.
 
 ## Infra
 
@@ -17,27 +33,52 @@ This project creates one VPC, three public and private subnets, three private an
 
 
 ```bash
+.
+├── README.md
+├── ansible.cfg
 ├── main.tf
 ├── modules
-│   ├── instance
-│   │   ├── main.tf
-│   │   ├── output.tf
-│   │   └── var.tf
-│   ├── security_groups
-│   │   ├── main.tf
-│   │   ├── output.tf
-│   │   └── var.tf
-│   └── vpc
-│       ├── main.tf
-│       ├── output.tf
-│       └── var.tf
+│   ├── instance
+│   │   ├── ansible-lemp-installation
+│   │   │   ├── README.md
+│   │   │   ├── inventroy
+│   │   │   ├── lemp-server
+│   │   │   │   ├── defaults
+│   │   │   │   │   └── main.yml
+│   │   │   │   ├── files
+│   │   │   │   │   └── main.yml
+│   │   │   │   ├── handlers
+│   │   │   │   │   └── main.yml
+│   │   │   │   ├── meta
+│   │   │   │   │   └── main.yml
+│   │   │   │   ├── tasks
+│   │   │   │   │   └── main.yml
+│   │   │   │   ├── templates
+│   │   │   │   │   └── server.conf
+│   │   │   │   ├── tests
+│   │   │   │   │   └── test.yml
+│   │   │   │   └── vars
+│   │   │   │       └── main.yml
+│   │   │   └── lemp-server.yaml
+│   │   ├── main.tf
+│   │   ├── output.tf
+│   │   └── var.tf
+│   ├── security_groups
+│   │   ├── main.tf
+│   │   ├── output.tf
+│   │   └── var.tf
+│   └── vpc
+│       ├── main.tf
+│       ├── output.tf
+│       └── var.tf
 ├── output.tf
 ├── provider.tf
-├── terraform.logs
 ├── terraform.tfstate
 ├── terraform.tfstate.backup
 ├── terraform.tfvars
 └── var.tf
+
+15 directories, 29 files
 ```
 
 ## Terraform variable files

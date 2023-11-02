@@ -24,12 +24,12 @@ resource "local_file" "private_key" {
 }
 # server creating it create default 2 instance and one for amazon-linux and ubuntu
 resource "aws_instance" "server" {
-  for_each      = local.server
-  ami           = each.value["ami"]
-  instance_type = each.value["instance_type"]
-  key_name      = aws_key_pair.key_pair.key_name
+  for_each               = local.server
+  ami                    = each.value["ami"]
+  instance_type          = each.value["instance_type"]
+  key_name               = aws_key_pair.key_pair.key_name
   vpc_security_group_ids = var.security_groups
-  subnet_id = each.key == "dev" ? local.public_subnets[0] : local.public_subnets[1]
+  subnet_id              = each.key == "dev" ? local.public_subnets[0] : local.public_subnets[1]
 
   tags = {
     Name = each.key
@@ -56,3 +56,20 @@ resource "aws_eip" "server_ip" {
 
 }
 
+resource "null_resource" "setup" {
+  depends_on = [
+    aws_instance.server,
+    aws_eip.server_ip,
+    aws_key_pair.key_pair
+  ]
+  provisioner "local-exec" {
+    command = <<EOT
+      chmod 400 ${path.module}/${var.key_name}.pem
+      ansible-playbook -u ubuntu -i ${aws_eip.server_ip[0].public_ip}, --private-key ${path.module}/${var.key_name}.pem ${path.module}/ansible-lemp-installation/lemp-server.yaml
+    EOT
+  }
+
+  triggers = {
+    key = "${path.module}/ansible-lemp-installation/lemp-server/tasks/main.yml"
+  }
+}

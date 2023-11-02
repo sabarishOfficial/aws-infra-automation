@@ -9,9 +9,9 @@ module "security" {
   server     = var.server_sg
 }
 module "server" {
-  source = "./modules/instance/"
-  key_name = var.key_name
-  ec2_instance = var.ec2_instance
+  source          = "./modules/instance/"
+  key_name        = var.key_name
+  ec2_instance    = var.ec2_instance
   security_groups = [module.security.office_ips, module.security.server_security_group]
-  subnets_id = module.vpc.subnets
+  subnets_id      = module.vpc.subnets
 }
